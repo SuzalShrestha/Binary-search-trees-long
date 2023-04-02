@@ -105,9 +105,15 @@ function getParentNode(rootNode, target) {
   }
 }
 
-function inOrderPredecessor(rootNode, target) {
+function inOrderPredecessor(rootNode, target, arr = []) {
   // Your code here
   let currentNode = rootNode;
+  if (currentNode.left) inOrderPredecessor(currentNode.left, target, arr);
+  arr.push(currentNode.val);
+  if (currentNode.right) inOrderPredecessor(currentNode.right, target, arr);
+  let index = arr.indexOf(target);
+  if (index === 0) return null;
+  return arr[index - 1];
 }
 
 function deleteNodeBST(rootNode, target) {
